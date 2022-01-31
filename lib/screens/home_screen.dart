@@ -1,11 +1,14 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 import 'package:travel_app/models/recommended_model.dart';
+import 'package:travel_app/models/popular_model.dart';
+import 'package:travel_app/models/beach_model.dart';
+import 'package:travel_app/widgets/bottom_navigation_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -19,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBarTravel(),
       body: SafeArea(
         child: Container(
           child: ListView(
@@ -182,7 +186,118 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           )),
                 ),
-              )
+              ),
+
+              //Dots indicator
+              // Using smoothPageIndicator Library
+              Padding(
+                padding: EdgeInsets.only(left: 28.8, top: 28.8),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 118.0),
+                  child: SmoothPageIndicator(
+                    controller: _pageController,
+                    count: recommendations.length,
+                    effect: ExpandingDotsEffect(
+                        activeDotColor: Colors.white,
+                        dotColor: Color(0xffababab),
+                        dotHeight: 5.8,
+                        dotWidth: 6,
+                        spacing: 5.8),
+                  ),
+                ),
+              ),
+
+              //Text Widget for Popular Categories
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 48.0, left: 28.8, right: 28.8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Popular Categories',
+                      style: GoogleFonts.playfairDisplay(
+                          fontSize: 28,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black),
+                    ),
+                    Text(
+                      'Show All',
+                      style: GoogleFonts.lato(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.grey),
+                    ),
+                  ],
+                ),
+              ),
+
+              //Horizontal List View for Categories
+              Container(
+                margin: EdgeInsets.only(top: 13.6),
+                height: 55.6,
+                child: ListView.builder(
+                  itemCount: populars.length,
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  padding: EdgeInsets.only(top: 28.8, right: 9.6),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.only(right: 19.2, left: 10),
+                      height: 45.6,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(9.6),
+                        color: Color(populars[index].color),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(
+                            width: 19.2,
+                          ),
+                          Image.asset(
+                            populars[index].image,
+                            height: 17.9,
+                          ),
+                          SizedBox(
+                            width: 19.2,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+
+              // ListView for Beach Section
+              Container(
+                margin: EdgeInsets.only(top: 28.8, bottom: 16.8),
+                height: 124.8,
+                child: ListView.builder(
+                  itemCount: beaches.length,
+                  padding: EdgeInsets.only(left: 28.8, right: 12),
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      height: 124.8,
+                      width: 188.4,
+                      margin: EdgeInsets.only(right: 16.8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(9.6),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(beaches[index].image),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+
+              //bottom navigation bar
             ],
           ),
         ),

@@ -35,32 +35,62 @@ class _BottomNavigationBarTravelState extends State<BottomNavigationBarTravel> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: _selectedIndex == 0
-                ? SvgPicture.asset('assets/svg/icon_home_colored.svg')
-                : SvgPicture.asset('assets/svg/icon_home.svg'),
+                ? Icon(
+                    Icons.home,
+                    color: Colors.red,
+                  )
+                : Icon(
+                    Icons.home,
+                    color: Colors.black,
+                  ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 1
-                ? SvgPicture.asset('assets/svg/icon_heart_colored.svg')
-                : SvgPicture.asset('assets/svg/icon_heart.svg'),
+                ? Icon(
+                    Icons.thumb_up,
+                    color: Colors.red,
+                  )
+                : Icon(
+                    Icons.thumb_up_alt_outlined,
+                    color: Colors.black,
+                  ),
             label: 'Heart',
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 2
-                ? SvgPicture.asset('assets/svg/icon_plus_colored.svg')
-                : SvgPicture.asset('assets/svg/icon_plus.svg'),
+                ? Icon(
+                    Icons.clear_rounded,
+                    color: Colors.red,
+                  )
+                : Icon(
+                    Icons.add,
+                    color: Colors.black,
+                  ),
             label: 'Plus',
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 3
-                ? SvgPicture.asset('assets/svg/icon_notification_colored.svg')
-                : SvgPicture.asset('assets/svg/icon_notification.svg'),
+                ? Icon(
+                    Icons.notifications_active,
+                    color: Colors.red,
+                  )
+                : Icon(
+                    Icons.notifications,
+                    color: Colors.black,
+                  ),
             label: 'Notification',
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 4
-                ? new SvgPicture.asset('assets/svg/icon_user_colored.svg')
-                : new SvgPicture.asset('assets/svg/icon_user.svg'),
+                ? Icon(
+                    Icons.account_circle,
+                    color: Colors.red,
+                  )
+                : Icon(
+                    Icons.account_circle_outlined,
+                    color: Colors.black,
+                  ),
             label: 'User',
           )
         ],
